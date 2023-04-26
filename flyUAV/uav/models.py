@@ -8,3 +8,5 @@ class uavModel(models.Model):
     weight=models.PositiveBigIntegerField(default=0)
     category=models.CharField(max_length=50)
     date=models.DateField()
+    image=models.URLField(default="")
+

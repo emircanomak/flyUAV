@@ -4,8 +4,10 @@ from .models import uavModel
 # Register your models here.
 @admin.register(uavModel)
 class uavModelAdmin(admin.ModelAdmin):
-    fields=('name','brand','weight','category','date')
+    list_display=('name','brand','weight','category','date','image')
 
+    class Meta:
+        model=uavModel
 
     
     
