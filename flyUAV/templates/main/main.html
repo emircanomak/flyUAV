@@ -18,13 +18,13 @@
 	  </button>
 	  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 		<li class="nav-item mx-2">
-		  <a class="nav-link" href="#populer">İŞLEMLER </a>
+		  <a class="nav-link" >İŞLEMLER </a>
 		</li>
 		<li class="nav-item mx-2">
-		  <a class="nav-link" href="#markalar">MARKALAR</a>
+		  <a class="nav-link" >MARKALAR</a>
 		</li>
 		<li class="nav-item mx-2">
-		  <a class="nav-link" href="#super">TEKLİFLER</a>
+		  <a class="nav-link" >TEKLİFLER</a>
 		</li>
 	  </ul>
   
@@ -41,105 +41,10 @@
 
   <section>
 	<div class="container py-5 mt-4">
-	  <div class="row">
-		<h2 class="mb-4">Süper Fiyat, Süper Teklif</h2>
-		<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-		  <div class="card">
-			<div class="d-flex justify-content-between p-3">
-			  <p class="lead mb-0">Bugünün Fırsatı !</p>
-  
-			</div>
-			<img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/690dc0123582253.6285f0294bd03.jpg"
-			  class="card-img-top" alt="Laptop" />
-			<div class="card-body">
-			  <div class="d-flex justify-content-between">
-				<p class="small"><a href="#!" class="text-muted">SİHA</a></p>
-				<p class="small text-danger"><s>$1099</s></p>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-3">
-				<h5 class="mb-0">Bayraktar Akıncı</h5>
-				<h5 class="text-dark mb-0">$999</h5>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-2">
-				<p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
-				<div class="ms-auto text-warning">
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-		  <div class="card">
-			<div class="d-flex justify-content-between p-3">
-			  <p class="lead mb-0">Bugünün Fırsatı !</p>
-  
-			</div>
-			<img
-			  src="https://www.timeturk.com/resim/detay/172/1729187.jpg"
-			  class="card-img-top" alt="Laptop" />
-			<div class="card-body">
-			  <div class="d-flex justify-content-between">
-				<p class="small"><a href="#!" class="text-muted">İHA</a></p>
-				<p class="small text-danger"><s>$1099</s></p>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-3">
-				<h5 class="mb-0">Bayraktar TB2</h5>
-				<h5 class="text-dark mb-0">$999</h5>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-2">
-				<p class="text-muted mb-0">Available: <span class="fw-bold">6</span></p>
-				<div class="ms-auto text-warning">
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-		  <div class="card">
-			<div class="d-flex justify-content-between p-3">
-			  <p class="lead mb-0">Bugünün Fırsatı !</p>
-  
-			</div>
-			<img src="https://trthaberstatic.cdn.wp.trt.com.tr/resimler/1958000/kizilelma-paylasimi-1959438.jpg" class="card-img-top"
-			  alt="Laptop" />
-			<div class="card-body">
-			  <div class="d-flex justify-content-between">
-				<p class="small"><a href="#!" class="text-muted">MIUS</a></p>
-				<p class="small text-danger"><s>$1099</s></p>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-3">
-				<h5 class="mb-0">Bayraktar Kızılelma</h5>
-				<h5 class="text-dark mb-0">$999</h5>
-			  </div>
-  
-			  <div class="d-flex justify-content-between mb-2">
-				<p class="text-muted mb-0">Available: <span class="fw-bold">5</span></p>
-				<div class="ms-auto text-warning">
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-				  <i class="fa fa-star"></i>
-  
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
+	  <div class="row" id="iha_list">
+
+		
+		
 	  </div>
 	  <form class="form">
 		<label for="01">One</label>
@@ -155,4 +60,48 @@
   
     
 	</body>
+	<script>
+		async function getIhaList(){
+			var iha_div=document.getElementById('iha_list')
+			await fetch('http://127.0.0.1:8000/api/iha/').then(data=>data.json()).then(data=>{
+				for(var i of data){
+					iha_div.innerHTML+=`
+					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
+						<div class="card">
+						  <div class="d-flex justify-content-between p-3">
+							<p class="lead mb-0">Bugünün Fırsatı !</p>
+				
+						  </div>
+						  <img src="${i.image}"
+							class="card-img-top" alt="Laptop" />
+						  <div class="card-body">
+							<div class="d-flex justify-content-between">
+							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
+							  <p class="small text-danger"><s></s></p>
+							</div>
+				
+							<div class="d-flex justify-content-between mb-3">
+							  <h5 class="mb-0">${i.model?i.model.name:''}</h5>
+							  <h5 class="text-dark mb-0">${i.brand?i.brand.name:''}</h5>
+							  <h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
+							</div>
+				
+							<div class="d-flex justify-content-between mb-2">
+							  <p class="text-muted mb-0">Ağırlık: <span class="fw-bold">${i.model?i.weight:''}</span></p>
+							  <div class="ms-auto text-warning">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>`
+				}
+			})
+		}
+		getIhaList()
+	</script>
 </html>
