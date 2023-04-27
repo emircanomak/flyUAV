@@ -22,7 +22,7 @@
 				<a href="/kabiliyetlerimiz.html">
 				  <li class="link-item">Hemen Kirala </li>
 				</a>
-				<a href="/endustri.html"> <li class="link-item">İlan Ver</li></a>
+				<a href="/addUav/"> <li class="link-item">İlan Ver</li></a>
 				<a href="/iletisim.html"> <li class="link-item">İletişim</li></a>
 			  </ul>
 			</div>
@@ -45,6 +45,7 @@
 		</div>
   <section>
 	{% comment %} #Filter Section {% endcomment %}
+	{% csrf_token %}
 	<div class="container py-5 mt-4">
 	  <div class="row" id="iha_list">
 	  </div>
@@ -63,6 +64,7 @@
 		
 		async function getIhaList(){
 			var iha_div=document.getElementById('iha_list')
+			iha_div.innerHTML=""
 			await fetch('http://127.0.0.1:8000/api/iha/').then(data=>data.json()).then(data=>{
 				for(var i of data){
 					iha_div.innerHTML+=`
@@ -92,7 +94,7 @@
 								 <button class="btn btn-primary">Güncelle</button> 
 							  </div>
 							  <div>
-								<button class="btn btn-danger">Sil</button> 
+								<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
 							 </div>
 							</div>
 						  </div>
@@ -100,6 +102,12 @@
 					  </div>`
 				}
 			})
+		}
+		async function deleteIha(id){
+			await fetch(`http://127.0.0.1:8000/api/iha/${id}/`,
+              {method:'DELETE',headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value}})
+			  .then(res=>getIhaList())
+            
 		}
 		getIhaList()
 	</script>
