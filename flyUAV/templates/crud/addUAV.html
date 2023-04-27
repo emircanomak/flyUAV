@@ -12,35 +12,120 @@
               <h6 class="text-center mb-4" style=" font-size: 2rem;">IHA Ekle</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2 p-5" >
-              <form>
+              <form> {% csrf_token %}
                 <div class="form-group">
                     <label for="example-search-input" class="form-control-label">Marka Adı</label>
+                    <select class="form-select" aria-label="Default select example " onchange="getModel()" id="bootcampId" formControlName="bootcampId" class="form-control">
+                    <option value="" disabled selected>Marka Seç</option>
+                  <option>
+                  </option>
                     <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
                 </div>
                 <div class="form-group">
-                    <label for="example-search-input" class="form-control-label">Model</label>
-                    <input class="form-control" placeholder="Model" formControlName="name" type="text"  id="example-search-input">
-                </div>
-                <div class="form-group">
-                    <label for="example-search-input" class="form-control-label">Kategori</label>
-                    <input class="form-control" placeholder="Kategori" formControlName="name" type="text"  id="example-search-input">
-                </div>
+                  <label for="example-search-input" class="form-control-label">Model Adı</label>
+                  <select class="form-select" aria-label="Default select example " id="model" formControlName="bootcampId" class="form-control">
+                  <option value="" disabled selected>Model Seç</option>
+                <option>
+                </option>
+                  <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
+              </div>
+              <div class="form-group">
+                <label for="example-search-input" class="form-control-label">Kategori Adı</label>
+                <select class="form-select" aria-label="Default select example " id="category" formControlName="bootcampId" class="form-control">
+                <option value="" disabled selected>Kategori Seç</option>
+              <option>
+              </option>
+                <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
+            </div>
                 <div class="form-group">
                     <label for="example-search-input" class="form-control-label">Fiyat</label>
-                    <input class="form-control" placeholder="Fiyat" formControlName="name" type="text"  id="example-search-input">
+                    <input class="form-control" placeholder="Fiyat" formControlName="name" type="text"  id="price">
                 </div>
                 <div class="form-group">
                     <label for="example-search-input" class="form-control-label">Resim adresi</label>
-                    <input class="form-control" placeholder="Resim adresi" formControlName="name" type="search"  id="example-search-input">
+                    <input class="form-control" placeholder="Resim adresi" formControlName="name" type="search"  id="img">
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="form-control-label">Başlangıç Tarihi</label>
-                    <input class="form-control" type="date" formControlName="dateStart" value="2018-11-23" id="example-date-input">
+                    <input class="form-control" type="date" formControlName="dateStart" value="2018-11-23" id="date">
                 </div>
-              <button (click)="add()" style="margin-right:15px" type="submit" class="btn btn-warning">Ekle</button>
-              <button type="button" class="btn btn-outline-dark px-3" routerLink="/admin/admin-bootcampList">GERİ Dön</button>
+              <button onclick="addUav()" style="margin-right:15px" type="button" class="btn btn-warning">Ekle</button>
+              <button type="button" class="btn btn-outline-dark px-3" onclick="window.location.href='/home/'">Geri Dön</button>
               </form>
             </div>
           </div>
+          <script>
+            async function getBrands(){
+              var bootcampId=document.getElementById('bootcampId')
+              await fetch('http://127.0.0.1:8000/api/brand/',
+              {headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value}})
+              .then(data=>data.json()).then(response=>{
+                for(var i of response){
+                  var opt = document.createElement('option');
+                  opt.value = i.id;
+                  opt.innerHTML = i.name;
+                  bootcampId.appendChild(opt);
+                }
+              })
+            }
+            getBrands()
+            async function getCategory(){
+              var bootcampId=document.getElementById('category')
+              await fetch('http://127.0.0.1:8000/api/category/',
+              {headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value}})
+              .then(data=>data.json()).then(response=>{
+                for(var i of response){
+                  var opt = document.createElement('option');
+                  opt.value = i.id;
+                  opt.innerHTML = i.name;
+                  bootcampId.appendChild(opt);
+                }
+              })
+            }
+            getCategory()
+            async function getModel(){
+              var bootcampId=document.getElementById('model')
+              bootcampId.innerHTML=""
+              await fetch('http://127.0.0.1:8000/api/model/',
+              {headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value}})
+              .then(data=>data.json()).then(response=>{
+                for(var i of response){
+                  var opt = document.createElement('option');
+                  opt.value = i.id;
+                  opt.innerHTML = i.name;
+                  bootcampId.appendChild(opt);
+                }
+              })
+            }
+            getModel()
+            async function addUav(){
+              const formData= new FormData()
+              
+              var bootcampId=document.getElementById('bootcampId')
+              var model=document.getElementById('model')
+              var category=document.getElementById('category')
+              var price=document.getElementById('price')
+              var img=document.getElementById('img')
+              var date=document.getElementById('date')
+
+              formData.append('brand',bootcampId.value)
+              formData.append('model',model.value)
+              formData.append('category',category.value)
+              formData.append('price',price.value)
+              formData.append('img',img.value)
+              formData.append('date',date.value)
+              await fetch('http://127.0.0.1:8000/api/iha/',
+              {method:'POST',headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value},body:formData})
+              .then(data=>data.json()).then(response=>{
+                for(var i of response){
+                  var opt = document.createElement('option');
+                  opt.value = i.id;
+                  opt.innerHTML = i.name;
+                  bootcampId.appendChild(opt);
+                }
+              })
+            }
+          </script>
+          
 	</body>
 </html>
