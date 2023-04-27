@@ -1,0 +1,219 @@
+{% load static%}
+
+<html>
+	<head>
+		<link rel="stylesheet" href="{%static 'style/bootstrap.css'%}">
+		<link rel="stylesheet" href="{%static 'style/bootstrap.min.css'%}">
+
+	</head>
+	<body>  
+        <div style="border-top: 1px solid rgb(40, 26, 34,0.23); width: 55%; margin: auto;" class="card mb-4 mt-5 px-8">
+            <div class="card-header pb-0">
+              <h6 class="text-center mb-4" style=" font-size: 2rem;">Güncelle</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2 p-5" >
+              <form> {% csrf_token %}
+                <div class="form-group">
+                    <label for="example-search-input" class="form-control-label">Marka Adı</label>
+                    <select class="form-select" aria-label="Default select example " onchange="getModel()" id="bootcampId" formControlName="bootcampId" class="form-control">
+                    <option value="" disabled selected>Marka Seç</option>
+                  <option>
+                  </option>
+                    <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
+                </div>
+                <div class="form-group">
+                  <label for="example-search-input" class="form-control-label">Model Adı</label>
+                  <select class="form-select" aria-label="Default select example " id="model" formControlName="bootcampId" class="form-control">
+                  <option value="" disabled selected>Model Seç</option>
+                <option>
+                </option>
+                  <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
+              </div>
+              <div class="form-group">
+                <label for="example-search-input" class="form-control-label">Kategori Adı</label>
+                <select class="form-select" aria-label="Default select example " id="category" formControlName="bootcampId" class="form-control">
+                <option value="" disabled selected>Kategori Seç</option>
+              <option>
+              </option>
+                <input class="form-control" placeholder="Marka Adı" formControlName="name" type="text"  id="example-search-input">
+            </div>
+                <div class="form-group">
+                    <label for="example-search-input" class="form-control-label">Fiyat</label>
+                    <input class="form-control" placeholder="Fiyat" formControlName="name" type="text"  id="price">
+                </div>
+                <div class="form-group">
+                    <label for="example-search-input" class="form-control-label">Resim adresi</label>
+                    <input class="form-control" placeholder="Resim adresi" formControlName="name" type="search"  id="img">
+                </div>
+                <div class="form-group">
+                    <label for="example-date-input" class="form-control-label">Başlangıç Tarihi</label>
+                    <input class="form-control" type="date" formControlName="dateStart" value="2018-11-23" id="date">
+                </div>
+              <button onclick="addUav()" style="margin-right:15px" type="button" class="btn btn-success">Ekle   </button>
+              <button class="btn btn-danger" type="button" class="btn btn-outline-dark px-3" onclick="window.location.href='/home/'">Geri Dön</button>
+              </form>
+            </div>
+          </div>
+          <script>
+            async function updateIha(id){
+                var brand_data=document.getElementById('brand')
+                var model_data=document.getElementById('model')
+                var category_data=document.getElementById('category')
+                var file=document.getElementById('price')
+                var img=document.getElementById('img')
+                var date=document.getElementById('date')
+               
+
+        //Girilen verileri toplamak için FormData oluşturur.
+        const formData = new FormData();
+            //Kullanıcı bir seçim yatıysa FormDataya ekler, Seçmemişse eklemez.
+        if(file.files[0]){
+            formData.append("img",file.files[0])
+        }
+    
+        if(brand_data.value){
+            formData.append("brand",parseInt(brand_data.value))
+        }
+        if(model_data.value){
+            formData.append("model",parseInt(model_data.value))
+        }
+        if(category_data.value){
+            formData.append("category",parseInt(category_data.value))
+        }
+        if(weight.value){
+            formData.append("price",parseInt(weight.value))
+        }
+        if(date.value){
+            formData.append("date",parseInt(date.value))
+        }
+    
+    
+        //update işlemi yapılır.
+                    const response = await fetch(`http://127.0.0.1:8000/api/iha/${id}`,{
+                    method:'PUT',
+                    headers:{
+            
+                      'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                    },
+                    body:formData
+            
+                })
+                if (response.status === 200) {
+                    window.location.href = "http://127.0.0.1:8000/";
+                } else {
+                    console.log("error");
+                }
+            }
+        </script>
+        <script>
+    
+              // DRF veri kaynağından veri almak için AJAX kullanır
+            $(document).ready(function(){
+                $.ajax({
+                    url: '/api/iha',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                    //  Eğer başarılı ise verileri HTML tablosuna günceller
+                    var tbody = document.getElementById('iha_list');
+                    console.log(tbody)
+                for(var i of data){
+                //HTML Tabloya günceller.
+                tbody.innerHTML+=`
+                <div class="card mx-1 my-1" style="width: 18rem;">
+                                <img class="card-img-top" src="${i.image}" alt="Card image cap">
+                                <div class="card-body">
+                                <h5 class="card-title">${i.model.name}</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item">${i.brand.name}</li>
+                                <li class="list-group-item">${i.category.name}</li>
+                                <li class="list-group-item">${i.date}</li>
+                                </ul>
+                            </div>`
+                }
+                    },
+                    //Başarısız ise hata mesajı gönder.
+                    error: function(xhr, status, error) {
+                    console.log('Error:', error);
+                    }
+                });
+            });
+
+            //GETCATEGORY
+            function getCategory() {
+                //URL Get isteği gönderir.
+                fetch('http://127.0.0.1:8000/api/category/', {
+                    method: 'get',
+                })
+                //Yanıtı jsona çevirir.
+                //Yanıtı HTMLde category_list içine yerleştirir.
+                //Berlirli bir kategoriye tıkladığında filtreleme işlemi yapmasını sağlar.
+                    .then(data => data.json())
+                    .then(data => {
+                        for (var i of data) {
+                            category.innerHTML += `
+               <p><a onclick="filterByCategory('${i.name}')">${i.name}</a></p>` 
+               //Her bir kategori için option oluşturur.
+               //category_liste eklenir.
+                            var newOption = document.createElement('option');
+                            newOption.value = i.id
+                            newOption.text = i.name
+                            category.appendChild(newOption)
+                        }
+                    })
+            }
+            //GETBRAND
+        function getBrand() {
+            //URL Get isteği gönderir.
+            fetch('http://127.0.0.1:8000/api/brand/', {
+                method: 'get',
+            })
+            //Yanıtı jsona çevirir.
+            //Yanıtı HTMLde category_list içine yerleştirir.
+            //Berlirli bir markaya tıkladığında filtreleme işlemi yapmasını sağlar.
+                .then(data => data.json())
+                .then(data => {
+                    for (var i of data) {
+                        brand.innerHTML += `
+           <p><a onclick="filterByBrand('${i.name}')">${i.name}</a></p>`
+           //Her bir marka için option oluşturur.
+           //brand_liste eklenir.
+                        var newOption = document.createElement('option');
+                        newOption.value = i.id
+                        newOption.text = i.name
+                        //Boş model gelememsi için newOPtion.Selected = true kullanılır.
+                        newOption.selected = true
+                        brand.appendChild(newOption)
+                    }
+                })
+        }
+
+        //GETMODEL
+        function getModel(id) {
+            //HTML içini temizler
+            model.innerHTML = ""
+            //brand seçtikten sonra modeli seçebilmek için brand.id alınır.
+            fetch(`http://127.0.0.1:8000/api/model?brand=${id.value}`, {
+                method: 'get',
+            })
+            //Yanıtı jsona çevirir.
+                .then(data => data.json())
+                .then(data => {
+                    for (var i of data) {
+                         //Her bir model için option oluşturur.
+                        //mdoel_liste eklenir.
+                        var newOption = document.createElement('option');
+                        newOption.value = i.id
+                        newOption.text = i.name
+                        model.appendChild(newOption)
+                    }
+                })
+        }
+        //Sayfa yüklendiğinde çalışması gereken func.
+        getBrand();
+        getCategory()
+          </script>
+          
+	</body>
+</html>

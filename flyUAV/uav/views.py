@@ -58,6 +58,10 @@ def login_request(request):
 def getAddUav(request):
     return render (request,"crud/addUAV.html")
 
+@login_required(login_url="/")
+def getUpdateUav(request):
+    return render (request,"crud/updateUAV.html")
+
 
 # Rest Framework #
 class CategoryViewSet(viewsets.ModelViewSet):
