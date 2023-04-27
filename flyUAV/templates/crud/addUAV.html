@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="{%static 'style/bootstrap.min.css'%}">
 
 	</head>
-	<body>
+	<body>  
         <div style="border-top: 1px solid rgb(40, 26, 34,0.23); width: 55%; margin: auto;" class="card mb-4 mt-5 px-8">
             <div class="card-header pb-0">
               <h6 class="text-center mb-4" style=" font-size: 2rem;">IHA Ekle</h6>
@@ -49,8 +49,8 @@
                     <label for="example-date-input" class="form-control-label">Başlangıç Tarihi</label>
                     <input class="form-control" type="date" formControlName="dateStart" value="2018-11-23" id="date">
                 </div>
-              <button onclick="addUav()" style="margin-right:15px" type="button" class="btn btn-warning">Ekle</button>
-              <button type="button" class="btn btn-outline-dark px-3" onclick="window.location.href='/home/'">Geri Dön</button>
+              <button onclick="addUav()" style="margin-right:15px" type="button" class="btn btn-success">Ekle   </button>
+              <button class="btn btn-danger" type="button" class="btn btn-outline-dark px-3" onclick="window.location.href='/home/'">Geri Dön</button>
               </form>
             </div>
           </div>
@@ -114,7 +114,7 @@
               formData.append('price',price.value)
               formData.append('img',img.value)
               formData.append('date',date.value)
-              await fetch('http://127.0.0.1:8000/api/iha/',
+              await fetch('http:',
               {method:'POST',headers:{'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value},body:formData})
               .then(data=>data.json()).then(response=>{
                 for(var i of response){
