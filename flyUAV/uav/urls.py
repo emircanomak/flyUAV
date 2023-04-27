@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
-from .views import getRegisterPage,getHomePage,login_request,BrandViewSet,CategoryViewSet,ModelViewSet,IhaViewSet
+from .views import getRegisterPage,getHomePage,getAddUav,login_request,BrandViewSet,CategoryViewSet,ModelViewSet,IhaViewSet
 
 app_name="uav"
 
@@ -18,6 +18,7 @@ urlpatterns = [
     path('',login_request),
     path('register/',getRegisterPage),
     path("home/",getHomePage,name="home"),
+    path("addUav/",getAddUav),
     path('api/', include(router.urls)),
 
 ]

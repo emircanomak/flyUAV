@@ -52,7 +52,14 @@ def login_request(request):
                                                 })
     return render(request,'login/login.html')
 
+# Crud #
 
+@login_required(login_url="/")
+def getAddUav(request):
+    return render (request,"crud/addUAV.html")
+
+
+# Rest Framework #
 class CategoryViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
