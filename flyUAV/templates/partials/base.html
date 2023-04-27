@@ -1,8 +1,32 @@
 {%load static%}
-<html>
+<html lang="{{lang}}">
 
     <head>
-        <link href="{%static 'style/main.css'%}">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}" type="text/css"/>
+        <link rel="stylesheet" href="{% static "style/main.css" %}" type="text/css"/>
+        <link rel="stylesheet" href="{% static "style/navbar.css" %}" type="text/css"/>
+        <link rel="stylesheet" href="{% static "style/footer.css" %}" type="text/css"/>
+
     </head>
+    <body>
+        <div style="width: 100%;">
+    {% block navbar %}
+        {% include 'partials/navbar.html' %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+      {% include 'partials/footer.html' %}
+    {% endblock %}
+        </div>
+
+        {% block extra_script %}{% endblock extra_script %}
+
+    </body>
     
 </html>

@@ -1,0 +1,26 @@
+/* Footer Start */
+.footer-container {
+    display: flex;
+    background-color: #09121c;
+  }
+  
+  .footer-text-container p {
+    margin-left: 20rem;
+    margin-top: 15px;
+    color: #4d4d4d;
+    text-align: center;
+  }
+  
+  .footer-container .footer-logo {
+    margin-top: 5px;
+    margin-left: 10%;
+  }
+  
+  .footer-image-item {
+    top: 0;
+    bottom: 15px;
+    padding: 5px;
+    width: 20%;
+  }
+  
+  /* //Footer End */

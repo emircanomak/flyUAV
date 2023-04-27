@@ -1,0 +1,30 @@
+{% load static%}
+<html>
+	<head>
+		<link rel="stylesheet" href="{%static 'style/main.css'%}">
+		<link rel="stylesheet" href="{%static 'style/bootstrap.css'%}">
+		<link rel="stylesheet" href="{%static 'style/bootstrap.min.css'%}">
+
+	</head>
+	<body>
+ <footer style="width: 100%;">
+    <div class="footer-container">
+        <div class="footer-logo">
+            <a >
+                <img class="footer-image-item" src="{{ site_settings.footer_logo_url }}" alt=""/>
+                  
+            </a>
+        </div>
+        <div class="footer-text-container">
+            <p>{{ site_settings.copyright_text|default_if_none:''|safe }}&nbsp; &nbsp; &nbsp;
+                <a href="{{ site_settings.kvkk_file_link|default_if_none:''|safe }}"
+                   style="color: inherit">
+                    {{ site_settings.kvkk_footer_text|default_if_none:'javascript:;.html'|safe }}
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+        
+	</body>
+</html>

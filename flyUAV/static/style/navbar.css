@@ -1,16 +1,24 @@
 /* Navbar */
 .navbar-container {
-    display: flex;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 16px 100px;
+  display: flex;
+  position: fixed;
+  font-size: 18px;
+  top: 0;
+  right: 0;
+  left: 0;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 16px 170px;
+  font-family: "Montserrat", sans-serif;
+  transition: all 0.5s;
   }
+  .navbar-container:hover {
+    background: #090f18;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+  }
+
   @media (max-width: 1024px) {
     .navbar-container {
       padding-left: 40px;
@@ -27,6 +35,7 @@
       padding: 10px 25px;
     }
   }
+
   
   .link-container {
     display: flex;
