@@ -1,19 +1,108 @@
 /* Home */
-
-  /* Navbar */
-.navbar-dark .nav-item .nav-link {
-  color: #fff;
+/* Header */
+.header {
+  width: 100%;
+  position: relative;
 }
 
-.navbar-dark .nav-item .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-  border-radius: 0.25rem;
+.header-bg-video {
+  width: 100%;
+  position: relative;
+}
+.kabiliyetlerimiz-text-container {
+  height: auto;
+  width: auto;
+  position: absolute;
+  padding-left: 100px;
+  bottom: 120px;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+.kabiliyetlerimiz-text-container h2 {
+  font-size: 90px;
+  font-weight: 400;
   color: #fff;
 }
-  /* NavbarEnd */
+.kabiliyetlerimiz-text-container p {
+  font-size: 15px;
+  font-weight: 300;
+  max-width: 580px;
+  text-align: justify;
+  margin-top: 13px;
+}
+.kabiliyetlerimiz-text-container h3 {
+  font-size: 24px;
+  font-weight: 300;
+}
+@media (max-width: 1024px) {
+  .kabiliyetlerimiz-text-container {
+    position: absolute;
+    padding-left: 70px;
+    bottom: 80px;
+  }
+  .kabiliyetlerimiz-text-container h2 {
+    font-size: 50px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .kabiliyetlerimiz-text-container p {
+    font-size: 12px;
+    font-weight: 300;
+    max-width: 350px;
+    margin-top: 11px;
+  }
+  .kabiliyetlerimiz-text-container h3 {
+    font-size: 24px;
+    font-weight: 200;
+  }
+}
+@media (max-width: 768px) {
+  .kabiliyetlerimiz-text-container {
+    position: absolute;
+    padding-left: 60px;
+    bottom: 80px;
+  }
+  .kabiliyetlerimiz-text-container h2 {
+    font-size: 45px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .kabiliyetlerimiz-text-container h3 {
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .kabiliyetlerimiz-text-container p {
+    font-size: 12px;
+    font-weight: 300;
+    max-width: 250px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 640px) {
+  .kabiliyetlerimiz-text-container {
+    position: absolute;
+    padding-left: 10px;
+    bottom: 20px;
+  }
+  .kabiliyetlerimiz-text-container h2 {
+    font-size: 25px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .kabiliyetlerimiz-text-container h3 {
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .kabiliyetlerimiz-text-container p {
+    font-size: 10px;
+    font-weight: 300;
+    max-width: 200px;
+    margin-top: 8px;
+  }
+}
+/* Header End */
 
-  /* Sidebar Filter */
+/* Sidebar Filter */
 .form {
   --background: #ffffff;
   --text: #414856;
@@ -143,8 +232,7 @@
   --scale: 1;
 }
   /* Sidebar Filter End */
-
-
+  
 /* Home End */
 
   /* Login Page */

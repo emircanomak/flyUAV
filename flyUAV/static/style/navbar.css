@@ -1,0 +1,124 @@
+/* Navbar */
+.navbar-container {
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 16px 100px;
+  }
+  @media (max-width: 1024px) {
+    .navbar-container {
+      padding-left: 40px;
+      padding-right: 30px;
+    }
+  }
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 25px 50px;
+    }
+  }
+  @media (max-width: 640px) {
+    .navbar-container {
+      padding: 10px 25px;
+    }
+  }
+  
+  .link-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .link-container a {
+    list-style-type: none;
+    text-decoration: none;
+  }
+  @media (max-width: 768px) {
+    .link-container {
+      display: none;
+    }
+  }
+  
+  .logo {
+    max-width: 160px;
+  }
+  @media (max-width: 768px) {
+    .logo {
+      max-width: 140px;
+    }
+  }
+  @media (max-width: 640px) {
+    .logo {
+      max-width: 80px;
+    }
+  }
+  
+  .header-link {
+    display: flex;
+  }
+  
+  .link-item {
+    margin-left: 20px;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+  }
+  @media (max-width: 1024px) {
+    .link-item {
+      margin-left: 10px;
+    }
+  }
+  
+  .button-item {
+    color: white;
+    background-color: #0c55c2;
+    border-radius: 50px;
+    border: 0;
+    margin-left: 2rem;
+    padding: 7px 23px;
+    font-weight: 200;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+  }
+  @media (max-width: 1024px) {
+    .button-item {
+      padding: 5px 15px;
+      font-size: 14px;
+      margin-left: 1rem;
+    }
+  }
+  
+  .hamburger-icon {
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .hamburger-icon {
+      display: block;
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 640px) {
+    .hamburger-icon {
+      font-size: 22px;
+    }
+  }
+  
+
+  
+  .navbar-elements {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .navbar-elements {
+      display: flex;
+      align-items: center;
+    }
+  } /*# sourceMappingURL=navbar.css.map */
+  
+  /* NavbarEnd */
