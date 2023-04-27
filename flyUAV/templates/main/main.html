@@ -8,12 +8,15 @@
 				  </video>
 				  <div class="kabiliyetlerimiz-text-container">
 					<h2 id="animate_h2" class="animate__animated animate__fadeInLeft">
-						FLY UAV
+						<button data-text="Awesome" class="button">
+							<span class="actual-text">&nbsp;flyuav&nbsp;</span>
+							<span class="hover-text" aria-hidden="true">&nbsp;flyuav&nbsp;</span>
+						</button>
 					</h2>
 					<p id="animate_p" class="animate__animated animate__fadeInUp">
 						Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.
 					</p>
-				  </div>
+					
 			</div>
 		</div>
   <section>
@@ -21,14 +24,14 @@
 	<div class="container py-5 mt-4">
 	  <div class="row" id="iha_list">
 	  </div>
-	  <form class="form">
+	  <!-- <form class="form">
 		<label for="01">One</label>
 		<input id="01" type="radio" name="r" value="1" checked="">
 		<label for="02">Two</label>
 		<input id="02" type="radio" name="r" value="2">
 		<label for="03">Three</label>
 		<input id="03" type="radio" name="r" value="3">
-	</form>
+	</form> -->
 	</div>
   </section>
   {% endblock %}
@@ -43,9 +46,9 @@
 				for(var i of data){
 					iha_div.innerHTML+=`
 					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0" id="rent">
-						<div class="card" style="height:500px" >
+						<div class="card" style="height:550px" >
 						  <div class="d-flex justify-content-between p-3">
-							<p class="lead mb-0">Bugünün Fırsatı !</p>
+							<p class="lead mb-0">Hemen Kirala !</p>
 				
 						  </div>
 						  <img src="${i.image}"
@@ -64,14 +67,15 @@
 				
 							<div class="d-flex justify-content-between mb-2">
 							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
-							</div>
+							
 							<div>
-								 <button class="btn btn-primary">Güncelle</button> 
+								<a href="/updateUav/"<button class="btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button> </a>
 							  </div>
 							  <div>
 								<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
 							 </div>
 						  </div>
+						</div>
 						</div>
 					  </div>`
 				}
