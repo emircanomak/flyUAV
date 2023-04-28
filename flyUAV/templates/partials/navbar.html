@@ -17,6 +17,11 @@
 				</a>
 				<a href="/addUav/"> <li class="link-item">İLAN VER</li></a>
 				<a href="/logout" onclick="log"> <li class="link-item">ÇIKIŞ YAP</li></a>
+				<a href="/logout" onclick="log"> <li class="link-item">{% if user.is_authenticated %}
+					<p>Hoşgeldin {{ user.username|upper}}!</p>
+					
+					{% endif %}</li></a>
+
 			  </ul>
 			</div>
 	  </nav>
