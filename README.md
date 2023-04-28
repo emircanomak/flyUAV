@@ -48,13 +48,13 @@ Edit  category : http://127.0.0.1:8000/api/category/
 #### Home Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/main-gif.gif" width="auto"><br/><br/>
 #### Register Page
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/registerPage.png" width="auto"><br/><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/registerPage.png" width="auto"><br/><hr/>
 #### Login Page
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/loginPage.png" width="auto"><br/><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/loginPage.png" width="auto"><br/><hr/>
 #### Add Page
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/addUav.png" width="auto"><br/><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/addUav.png" width="auto"><br/><hr/>
 #### Update Page
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/updateUAV.png" width="auto"><br/><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/updateUAV.png" width="auto"><br/><hr/>
 
 
 
