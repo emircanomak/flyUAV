@@ -143,6 +143,10 @@ class IhaViewSet(viewsets.ModelViewSet):
             queryset = ihaModel.objects.filter(category__name__icontains=request.GET.get('category'))
             serializer = IhaSerializerGet(queryset, many=True)
             return Response(serializer.data)
+        elif request.GET.get('model') is not None:
+            queryset = ihaModel.objects.filter(model__name__icontains=request.GET.get('model'))
+            serializer = IhaSerializerGet(queryset, many=True)
+            return Response(serializer.data)
         elif request.GET.get('search') is not None:
             queryset = ihaModel.objects.filter(Q(brand__name__icontains=request.GET.get('search')) | Q(
                 category__name__icontains=request.GET.get('search')) | Q(

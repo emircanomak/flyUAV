@@ -2,6 +2,8 @@
 {% load static%}
 
 {% block content %}
+
+	{% comment %} Header Start {% endcomment %}
 		<div class="header">
 				<video id="animate-video" class="header-bg-video" autoplay muted loop >
 					<source src="/static/assets/flyUav-video.mp4" type="video/mp4" sizes="100%" />
@@ -19,26 +21,43 @@
 					
 			</div>
 		</div>
+		{% comment %} Header End {% endcomment %}
+
+
+		{% comment %} Card {% endcomment %}
   <section>
 	{% csrf_token %}
 	<div class="container py-5 mt-4">
 	  <div class="row" id="iha_list">
 	  </div>
-	  <!-- <form class="form">
-		<label for="01">One</label>
-		<input id="01" type="radio" name="r" value="1" checked="">
-		<label for="02">Two</label>
-		<input id="02" type="radio" name="r" value="2">
-		<label for="03">Three</label>
-		<input id="03" type="radio" name="r" value="3">
-	</form> -->
 	</div>
   </section>
+  {% comment %} Search {% endcomment %}
+  <div class="group">
+	<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+	<input placeholder="Search" type="search" onkeyup="search(this.value)" class="input">
+  </div>
+  {% comment %} Category Filter {% endcomment %}
+  <h4>Marka</h4>
+  <form class="form" id="form_brand">
+	
+</form> 
+{% comment %} Brand Filter {% endcomment %}
+<h4>Model</h4>
+<form class="form" id="form_model">
+	
+</form> 
+{% comment %} Model Filter {% endcomment %}
+<h4>Kategori</h4>
+ <form class="form" id="form_category">
+	
+</form> 
+
   {% endblock %}
 
   {% block extra_script %}
 	<script>
-		
+	
 		async function getIhaList(){
 			var iha_div=document.getElementById('iha_list')
 			iha_div.innerHTML=""
@@ -49,7 +68,6 @@
 						<div class="card" style="height:550px" >
 						  <div class="d-flex justify-content-between p-3">
 							<p class="lead mb-0">Hemen Kirala !</p>
-				
 						  </div>
 						  <img src="${i.image}"
 							class="card-img-top" alt="Laptop" style="height:500px" />
@@ -58,23 +76,18 @@
 							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
 							  <p class="small text-danger"><s></s></p>
 							</div>
-				
-							<div class="d-flex justify-content-between mb-3">
+							<div class="d-flex justify-content-between mb-2">
 							  <h5 class="mb-0">${i.brand?i.brand.name:''}</h5>
-							  <h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
-							  <h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
 							</div>
-				
+							<h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
+							<h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
 							<div class="d-flex justify-content-between mb-2">
 							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
-							
-							<div>
-								<button class="btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
-							  </div>
-							  <div>
-								<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
-							 </div>
 						  </div>
+						  <div class="d-flex justify-content-around mx-5">
+							<button class="update-button btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
+							<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
+						 </div>
 						</div>
 						</div>
 					  </div>`
@@ -92,5 +105,221 @@
             
 		}
 		getIhaList()
+		
+		
+	function getCategory() {
+		var form_category=document.getElementById('form_category')
+
+		fetch('http://127.0.0.1:8000/api/category/', {
+			method: 'get',
+		})
+		.then(data => data.json())
+		.then(data => {
+			for(var i of data){
+				form_category.innerHTML+=`
+				<label for="01">${i.name}</label>
+	<input onclick="filterByCategory(this.value)" id="${i.id}" type="radio" name="r" value="${i.name}" checked="">`
+			}
+		})
+		
+	}
+	getCategory()
+	function getBrand() {
+		var form_category=document.getElementById('form_brand')
+
+		fetch('http://127.0.0.1:8000/api/brand/', {
+			method: 'get',
+		})
+		.then(data => data.json())
+		.then(data => {
+			for(var i of data){
+				form_category.innerHTML+=`
+				<label for="01">${i.name}</label>
+	<input onclick="filterByBrand(this.value)" id="${i.id}" type="radio" name="r" value="${i.name}" checked="">`
+			}
+		})
+		
+	}
+	getBrand()
+	function getModel() {
+		var form_category=document.getElementById('form_model')
+
+		fetch('http://127.0.0.1:8000/api/model/', {
+			method: 'get',
+		})
+		.then(data => data.json())
+		.then(data => {
+			for(var i of data){
+				form_category.innerHTML+=`
+				<label for="01">${i.name}</label>
+	<input onclick="filterByModel(this.value)" id="${i.id}" type="radio" name="r" value="${i.name}" checked="">`
+			}
+		})
+		
+	}
+	getModel()
+	</script>
+
+	<script>
+		function filterByCategory(value){
+			var iha_div=document.getElementById('iha_list')
+			iha_div.innerHTML=""
+			fetch(`http://127.0.0.1:8000/api/iha/?category=${value}`, {
+				method: 'get',
+			})
+			.then(data => data.json())
+			.then(data => {
+				for(var i of data){
+					iha_div.innerHTML+=`
+					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0" id="rent">
+						<div class="card" style="height:550px" >
+						  <div class="d-flex justify-content-between p-3">
+							<p class="lead mb-0">Hemen Kirala !</p>
+						  </div>
+						  <img src="${i.image}"
+							class="card-img-top" alt="Laptop" style="height:500px" />
+						  <div class="card-body">
+							<div class="d-flex justify-content-between">
+							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
+							  <p class="small text-danger"><s></s></p>
+							</div>
+							<div class="d-flex justify-content-between mb-2">
+							  <h5 class="mb-0">${i.brand?i.brand.name:''}</h5>
+							</div>
+							<h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
+							<h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
+							<div class="d-flex justify-content-between mb-2">
+							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
+						  </div>
+						  <div class="d-flex justify-content-around mx-5">
+							<button class="update-button btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
+							<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
+						 </div>
+						</div>
+						</div>
+					  </div>`
+				}
+			})
+		}
+		function filterByBrand(value){
+			var iha_div=document.getElementById('iha_list')
+			iha_div.innerHTML=""
+			fetch(`http://127.0.0.1:8000/api/iha/?brand=${value}`, {
+				method: 'get',
+			})
+			.then(data => data.json())
+			.then(data => {
+				for(var i of data){
+					iha_div.innerHTML+=`
+					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0" id="rent">
+						<div class="card" style="height:550px" >
+						  <div class="d-flex justify-content-between p-3">
+							<p class="lead mb-0">Hemen Kirala !</p>
+						  </div>
+						  <img src="${i.image}"
+							class="card-img-top" alt="Laptop" style="height:500px" />
+						  <div class="card-body">
+							<div class="d-flex justify-content-between">
+							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
+							  <p class="small text-danger"><s></s></p>
+							</div>
+							<div class="d-flex justify-content-between mb-2">
+							  <h5 class="mb-0">${i.brand?i.brand.name:''}</h5>
+							</div>
+							<h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
+							<h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
+							<div class="d-flex justify-content-between mb-2">
+							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
+						  </div>
+						  <div class="d-flex justify-content-around mx-5">
+							<button class="update-button btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
+							<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
+						 </div>
+						</div>
+						</div>
+					  </div>`
+				}
+			})
+		}
+		function filterByModel(value){
+			var iha_div=document.getElementById('iha_list')
+			iha_div.innerHTML=""
+			fetch(`http://127.0.0.1:8000/api/iha/?model=${value}`, {
+				method: 'get',
+			})
+			.then(data => data.json())
+			.then(data => {
+				for(var i of data){
+					iha_div.innerHTML+=`
+					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0" id="rent">
+						<div class="card" style="height:550px" >
+						  <div class="d-flex justify-content-between p-3">
+							<p class="lead mb-0">Hemen Kirala !</p>
+						  </div>
+						  <img src="${i.image}"
+							class="card-img-top" alt="Laptop" style="height:500px" />
+						  <div class="card-body">
+							<div class="d-flex justify-content-between">
+							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
+							  <p class="small text-danger"><s></s></p>
+							</div>
+							<div class="d-flex justify-content-between mb-2">
+							  <h5 class="mb-0">${i.brand?i.brand.name:''}</h5>
+							</div>
+							<h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
+							<h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
+							<div class="d-flex justify-content-between mb-2">
+							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
+						  </div>
+						  <div class="d-flex justify-content-around mx-5">
+							<button class="update-button btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
+							<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
+						 </div>
+						</div>
+						</div>
+					  </div>`
+				}
+			})
+		}
+		function search(value){
+			var iha_div=document.getElementById('iha_list')
+			iha_div.innerHTML=""
+			fetch(`http://127.0.0.1:8000/api/iha/?search=${value}`, {
+				method: 'get',
+			})
+			.then(data => data.json())
+			.then(data => {
+				for(var i of data){
+					iha_div.innerHTML+=`
+					<div class="col-md-12 col-lg-4 mb-4 mb-lg-0" id="rent">
+						<div class="card" style="height:550px" >
+						  <div class="d-flex justify-content-between p-3">
+							<p class="lead mb-0">Hemen Kirala !</p>
+						  </div>
+						  <img src="${i.image}"
+							class="card-img-top" alt="Laptop" style="height:500px" />
+						  <div class="card-body">
+							<div class="d-flex justify-content-between">
+							  <p class="small"><a href="#!" class="text-muted">${i.category?i.category.name:''}</a></p>
+							  <p class="small text-danger"><s></s></p>
+							</div>
+							<div class="d-flex justify-content-between mb-2">
+							  <h5 class="mb-0">${i.brand?i.brand.name:''}</h5>
+							</div>
+							<h5 class="text-dark mb-0">${i.model?i.model.name:''}</h5>
+							<h5 class="text-dark mb-0">${i.date?i.date:''}</h5>
+							<div class="d-flex justify-content-between mb-2">
+							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
+						  </div>
+						  <div class="d-flex justify-content-around mx-5">
+							<button class="update-button btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
+							<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
+						 </div>
+						</div>
+						</div>
+					  </div>`
+				}
+			})
+		}
 	</script>
 	{% endblock %}
