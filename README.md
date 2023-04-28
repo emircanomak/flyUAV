@@ -54,7 +54,7 @@ Edit  category : http://127.0.0.1:8000/api/category/
 #### Add Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/addUav.png" width="auto"><br/><hr/>
 #### Update Page
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/updateUAV.png" width="auto"><br/><hr/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/updateUAV.png" width="auto"><br/>
 
 
 
