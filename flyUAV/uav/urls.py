@@ -19,7 +19,7 @@ urlpatterns = [
     path('register/',getRegisterPage),
     path("home/",getHomePage,name="home"),
     path("addUav/",getAddUav),
-    path("updateUav/",getUpdateUav),
+    path("updateUav/<int:id>/",getUpdateUav),
     path('api/', include(router.urls)),
 
 ]

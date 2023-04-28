@@ -59,8 +59,13 @@ def getAddUav(request):
     return render (request,"crud/addUAV.html")
 
 @login_required(login_url="/")
-def getUpdateUav(request):
-    return render (request,"crud/updateUAV.html")
+def getUpdateUav(request,id):
+    uav=ihaModel.objects.get(pk=id)
+    context={
+        "uav":uav,
+        "id":id
+    }
+    return render (request,"crud/updateUAV.html",context=context)
 
 
 # Rest Framework #

@@ -69,7 +69,7 @@
 							  <p class="text-muted mb-0">Fiyat: <span class="fw-bold">${i.model?i.weight:''}₺</span></p>
 							
 							<div>
-								<a href="/updateUav/"<button class="btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button> </a>
+								<button class="btn btn-primary" onclick="updateIha('${i.id}')">Güncelle</button>
 							  </div>
 							  <div>
 								<button onclick="deleteIha('${i.id}')" class="btn btn-danger">Sil</button> 
@@ -80,6 +80,10 @@
 					  </div>`
 				}
 			})
+		}
+		async function updateIha(id){
+			window.location.href='/updateUav/'+id+'/'
+
 		}
 		async function deleteIha(id){
 			await fetch(`http://127.0.0.1:8000/api/iha/${id}/`,

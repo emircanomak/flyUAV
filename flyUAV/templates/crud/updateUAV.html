@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <label for="example-search-input" class="form-control-label">Kategori Adı</label>
-                <select class="form-select" aria-label="Default select example " id="category" formControlName="bootcampId" class="form-control">
+                <select class="form-select" aria-label="Default select example " id="category"  class="form-control">
                 <option value="" disabled selected>Kategori Seç</option>
               <option>
               </option>
@@ -39,24 +39,24 @@
             </div>
                 <div class="form-group">
                     <label for="example-search-input" class="form-control-label">Fiyat</label>
-                    <input class="form-control" placeholder="Fiyat" formControlName="name" type="text"  id="price">
+                    <input class="form-control" placeholder="Fiyat" formControlName="name" type="text" value={{uav.weight}}  id="price">
                 </div>
                 <div class="form-group">
                     <label for="example-search-input" class="form-control-label">Resim adresi</label>
-                    <input class="form-control" placeholder="Resim adresi" formControlName="name" type="search"  id="img">
+                    <input class="form-control" placeholder="Resim adresi" formControlName="name" type="search" value="{{uav.image}}"  id="img">
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="form-control-label">Başlangıç Tarihi</label>
-                    <input class="form-control" type="date" formControlName="dateStart" value="2018-11-23" id="date">
+                    <input class="form-control" type="Boolean" formControlName="dateStart" value='{{uav.date}}'  id="date">
                 </div>
-              <button onclick="addUav()" style="margin-right:15px" type="button" class="btn btn-success">Ekle   </button>
+              <button onclick="updateIha('{{id}}')" style="margin-right:15px" type="button" class="btn btn-success">Ekle   </button>
               <button class="btn btn-danger" type="button" class="btn btn-outline-dark px-3" onclick="window.location.href='/home/'">Geri Dön</button>
               </form>
             </div>
           </div>
           <script>
             async function updateIha(id){
-                var brand_data=document.getElementById('brand')
+                var brand_data=document.getElementById('bootcampId')
                 var model_data=document.getElementById('model')
                 var category_data=document.getElementById('category')
                 var file=document.getElementById('price')
@@ -67,9 +67,7 @@
         //Girilen verileri toplamak için FormData oluşturur.
         const formData = new FormData();
             //Kullanıcı bir seçim yatıysa FormDataya ekler, Seçmemişse eklemez.
-        if(file.files[0]){
-            formData.append("img",file.files[0])
-        }
+
     
         if(brand_data.value){
             formData.append("brand",parseInt(brand_data.value))
@@ -80,16 +78,17 @@
         if(category_data.value){
             formData.append("category",parseInt(category_data.value))
         }
-        if(weight.value){
-            formData.append("price",parseInt(weight.value))
+        if(file.value){
+            formData.append("weight",parseInt(file.value))
         }
+
         if(date.value){
             formData.append("date",parseInt(date.value))
         }
     
     
         //update işlemi yapılır.
-                    const response = await fetch(`http://127.0.0.1:8000/api/iha/${id}`,{
+                    const response = await fetch(`http://127.0.0.1:8000/api/iha/${id}/`,{
                     method:'PUT',
                     headers:{
             
@@ -99,46 +98,18 @@
             
                 })
                 if (response.status === 200) {
-                    window.location.href = "http://127.0.0.1:8000/";
+                    window.location.reload();
                 } else {
                     console.log("error");
                 }
             }
         </script>
+        <script src="{% static 'js/jquery-min.js' %}"></script>
         <script>
+
     
               // DRF veri kaynağından veri almak için AJAX kullanır
-            $(document).ready(function(){
-                $.ajax({
-                    url: '/api/iha',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                    //  Eğer başarılı ise verileri HTML tablosuna günceller
-                    var tbody = document.getElementById('iha_list');
-                    console.log(tbody)
-                for(var i of data){
-                //HTML Tabloya günceller.
-                tbody.innerHTML+=`
-                <div class="card mx-1 my-1" style="width: 18rem;">
-                                <img class="card-img-top" src="${i.image}" alt="Card image cap">
-                                <div class="card-body">
-                                <h5 class="card-title">${i.model.name}</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                <li class="list-group-item">${i.brand.name}</li>
-                                <li class="list-group-item">${i.category.name}</li>
-                                <li class="list-group-item">${i.date}</li>
-                                </ul>
-                            </div>`
-                }
-                    },
-                    //Başarısız ise hata mesajı gönder.
-                    error: function(xhr, status, error) {
-                    console.log('Error:', error);
-                    }
-                });
-            });
+            
 
             //GETCATEGORY
             function getCategory() {
@@ -152,13 +123,15 @@
                     .then(data => data.json())
                     .then(data => {
                         for (var i of data) {
-                            category.innerHTML += `
-               <p><a onclick="filterByCategory('${i.name}')">${i.name}</a></p>` 
+
+                           
                //Her bir kategori için option oluşturur.
                //category_liste eklenir.
                             var newOption = document.createElement('option');
                             newOption.value = i.id
                             newOption.text = i.name
+                            newOption.text==='{{uav.category.name}}'?newOption.selected=true:''
+
                             category.appendChild(newOption)
                         }
                     })
@@ -175,26 +148,28 @@
                 .then(data => data.json())
                 .then(data => {
                     for (var i of data) {
-                        brand.innerHTML += `
+                        bootcampId.innerHTML += `
            <p><a onclick="filterByBrand('${i.name}')">${i.name}</a></p>`
+           console.log('{{uav.category}}')
            //Her bir marka için option oluşturur.
            //brand_liste eklenir.
                         var newOption = document.createElement('option');
                         newOption.value = i.id
                         newOption.text = i.name
                         //Boş model gelememsi için newOPtion.Selected = true kullanılır.
-                        newOption.selected = true
-                        brand.appendChild(newOption)
+                        
+                        newOption.text=='{{uav.brand}}'?newOption.selected=true:''
+                        bootcampId.appendChild(newOption)
                     }
                 })
         }
 
         //GETMODEL
-        function getModel(id) {
+        function getModel() {
             //HTML içini temizler
             model.innerHTML = ""
             //brand seçtikten sonra modeli seçebilmek için brand.id alınır.
-            fetch(`http://127.0.0.1:8000/api/model?brand=${id.value}`, {
+            fetch(`http://127.0.0.1:8000/api/model/`, {
                 method: 'get',
             })
             //Yanıtı jsona çevirir.
@@ -206,11 +181,13 @@
                         var newOption = document.createElement('option');
                         newOption.value = i.id
                         newOption.text = i.name
+                        newOption.text=='{{uav.model}}'?newOption.selected=true:''
                         model.appendChild(newOption)
                     }
                 })
         }
         //Sayfa yüklendiğinde çalışması gereken func.
+        getModel()
         getBrand();
         getCategory()
           </script>
