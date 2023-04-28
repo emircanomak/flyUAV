@@ -7,7 +7,7 @@
 1. Python - Django, Rest API , Postgre , JavaScript , Fetch , Ajax , Jazzmin,Django-User
 2. CSS - Bootstrap , jQuery
 
-###Getting Started###<br/><hr/>
+###Getting Started<br/><hr/>
 To clone the project;
 
     | git clone https://github.com/emircanomak/flyUAV 
