@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
+
 
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -48,9 +49,14 @@ def login_request(request):
            login(request ,user) 
            return redirect("home/")
        else:
-           return render(request, "login.html",{'error':'Kullanıcı Adı vey Parola hatalı', 
+           return render(request, "login/login.html",{'error':'Kullanıcı Adı veya Parola hatalı', 
                                                 })
     return render(request,'login/login.html')
+
+#Logout
+def custom_logout(request):
+    logout(request)
+    return redirect("/")
 
 # Crud #
 
