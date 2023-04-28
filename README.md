@@ -35,13 +35,13 @@ Edit  category : http://127.0.0.1:8000/api/category/
 ### Images from the Rest Api<br/><hr/>
 
 #### Rest Api Main
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-api-main.png" width="auto"><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-api-main.png" width="auto"><br/></hr>
 #### Rest Api Brand
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-brand.png" width="auto"><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-brand.png" width="auto"><br/></hr>
 #### Rest Api Category
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-category.png" width="auto"><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-category.png" width="auto"><br/></hr>
 #### Rest Api Model
-<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-model.png" width="auto"><br/><br/>
+<img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-model.png" width="auto"><br/><br/><hr/>
 
 ### Images from the App<br/><hr/>
 
