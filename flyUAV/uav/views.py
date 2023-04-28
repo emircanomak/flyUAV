@@ -29,7 +29,11 @@ def getLoginPage(request):
     return render(request,'login/login.html')
 
 def getRegisterPage(request):
-    return render(request,"register/register.html")
+
+    if request.method=='GET':
+        return render(request,"register/register.html")
+    else:
+        return register(request=request)
     
 
 @login_required(login_url="/")
@@ -73,7 +77,29 @@ def getUpdateUav(request,id):
     }
     return render (request,"crud/updateUAV.html",context=context)
 
+#Register #
+@csrf_exempt
+def register(request):
+    if request.method == 'POST':
 
+        username = request.POST['username']
+        password = request.POST['password']
+
+
+        if User.objects.filter(username=username).exists():
+            response_data = {
+                "username": "Kullanıcı adı zaten kayıtlı"
+            }
+            return render(request,'register/register.html',context=response_data)
+        else:
+            user = User.objects.create_user(username=username, password=password, is_active=True)
+            user.save()
+            response_data = {
+                "success": "Kullanıcı oluşturma başarılı"
+            }
+            return render(request, 'register/register.html', context=response_data)
+    else:
+        return render(request,'register/register.html')
 # Rest Framework #
 class CategoryViewSet(viewsets.ModelViewSet):
     """

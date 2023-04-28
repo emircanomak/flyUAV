@@ -13,35 +13,29 @@
 			<div class="container-fluid h-custom">
 			  <div class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-md-9 col-lg-6 col-xl-5">
-				  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+				  <img src="https://cdn.baykartech.com/media/upload/userFormUpload/RBaJIJP84ctKPJJWSoJe83JQBOgUKswk.png"
 					class="img-fluid" alt="Sample image">
 				</div>
 				<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-				  <form>  
+				  <form action="/register/" method="post">  {% csrf_token %}
+					{{success}}  {{username}}
 					<!-- Email input -->
 					<div class="form-outline mb-4">
-					  <input type="email" id="form3Example3" class="form-control form-control-lg"
+					  <input type="email" name="email" id="form3Example3" class="form-control form-control-lg"
 						placeholder="Mail adresiniz" />
 					  <label class="form-label" for="form3Example3">Mail Adresiniz</label>
 					</div>
 
                     <!-- Name input -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="form3Example3" class="form-control form-control-lg"
+                        <input type="text" name="username" id="form3Example3" class="form-control form-control-lg"
                           placeholder="Adınız" />
-                        <label class="form-label" for="form3Example3">Adınız</label>
-                      </div>
-
-                      <!-- Surname input -->
-                      <div class="form-outline mb-4">
-                        <input type="text" id="form3Example3" class="form-control form-control-lg"
-                          placeholder="Soyadınız" />
-                        <label class="form-label" for="form3Example3">Soyadınız</label>
+                        <label class="form-label" for="form3Example3">Kullanıcı Adınız</label>
                       </div>
 		  
 					<!-- Password input -->
 					<div class="form-outline mb-3">
-					  <input type="password" id="form3Example4" class="form-control form-control-lg"
+					  <input type="password" name="password" id="form3Example4" class="form-control form-control-lg"
 						placeholder="Şifreniz" />
 					  <label class="form-label" for="form3Example4">Şifreniz</label>
 					</div>
