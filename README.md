@@ -7,7 +7,7 @@
 1. Python - Django, Rest API , Postgre , JavaScript , Fetch , Ajax , Jazzmin,Django-User
 2. CSS - Bootstrap , jQuery
 
-###Getting Started<br/><hr/>
+### Getting Started<br/><hr/>
 To clone the project;
 
     | git clone https://github.com/emircanomak/flyUAV 
@@ -32,28 +32,28 @@ Edit  model : http://127.0.0.1:8000/api/model/
 Edit  brand : http://127.0.0.1:8000/api/brand/
 Edit  category : http://127.0.0.1:8000/api/category/
 
-###Images from the Rest Api<br/><hr/>
+### Images from the Rest Api<br/><hr/>
 
-####Rest Api Main
+#### Rest Api Main
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-api-main.png" width="auto"><br/>
-####Rest Api Brand
+#### Rest Api Brand
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-brand.png" width="auto"><br/>
-####Rest Api Category
+#### Rest Api Category
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-category.png" width="auto"><br/>
-####Rest Api Model
+#### Rest Api Model
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/rest-model.png" width="auto"><br/><br/>
 
-###Images from the App<br/><hr/>
+### Images from the App<br/><hr/>
 
-####Home Page
+#### Home Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/main-gif.gif" width="auto"><br/><br/>
-####Register Page
+#### Register Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/registerPage.png" width="auto"><br/><br/>
-####Login Page
+#### Login Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/loginPage.png" width="auto"><br/><br/>
-####Add Page
+#### Add Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/addUav.png" width="auto"><br/><br/>
-####Update Page
+#### Update Page
 <img src="https://github.com/emircanomak/flyUAV/blob/master/readme-assets/updateUAV.png" width="auto"><br/><br/>
 
 
