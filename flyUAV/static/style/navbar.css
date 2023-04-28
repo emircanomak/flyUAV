@@ -10,7 +10,7 @@
   align-items: center;
   z-index: 100;
   background: rgba(0, 0, 0, 0.6);
-  padding: 16px 170px;
+  padding: 5px 170px;
   font-family: "Montserrat", sans-serif;
   transition: all 0.5s;
   }
@@ -69,7 +69,10 @@
   .header-link {
     display: flex;
   }
-  
+  .header-link a li {
+    text-align: center;
+    margin-top: 15px;
+  }
   .link-item {
     margin-left: 20px;
     color: #fff;
@@ -118,8 +121,6 @@
     }
   }
   
-
-  
   .navbar-elements {
     display: none;
   }
@@ -128,6 +129,6 @@
       display: flex;
       align-items: center;
     }
-  } /*# sourceMappingURL=navbar.css.map */
+  }  
   
   /* NavbarEnd */
