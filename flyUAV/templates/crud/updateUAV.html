@@ -65,9 +65,7 @@
                 var date=document.getElementById('date')
                
 
-        //Girilen verileri toplamak için FormData oluşturur.
         const formData = new FormData();
-            //Kullanıcı bir seçim yatıysa FormDataya ekler, Seçmemişse eklemez.
 
     
         if(brand_data.value){
@@ -88,7 +86,7 @@
         }
     
     
-        //update işlemi yapılır.
+        //update 
                     const response = await fetch(`http://127.0.0.1:8000/api/iha/${id}/`,{
                     method:'PUT',
                     headers:{
@@ -109,7 +107,7 @@
         <script>
 
     
-              // DRF veri kaynağından veri almak için AJAX kullanır
+              // DRF Ajax
             
 
             //GETCATEGORY
@@ -118,16 +116,16 @@
                 fetch('http://127.0.0.1:8000/api/category/', {
                     method: 'get',
                 })
-                //Yanıtı jsona çevirir.
-                //Yanıtı HTMLde category_list içine yerleştirir.
-                //Berlirli bir kategoriye tıkladığında filtreleme işlemi yapmasını sağlar.
+                //Fetch to json.
+                //Fetch to HTML category
+            
                     .then(data => data.json())
                     .then(data => {
                         for (var i of data) {
 
                            
-               //Her bir kategori için option oluşturur.
-               //category_liste eklenir.
+               //category option
+               //add category
                             var newOption = document.createElement('option');
                             newOption.value = i.id
                             newOption.text = i.name
@@ -139,25 +137,25 @@
             }
             //GETBRAND
         function getBrand() {
-            //URL Get isteği gönderir.
+            //URL Get.
             fetch('http://127.0.0.1:8000/api/brand/', {
                 method: 'get',
             })
-            //Yanıtı jsona çevirir.
-            //Yanıtı HTMLde category_list içine yerleştirir.
-            //Berlirli bir markaya tıkladığında filtreleme işlemi yapmasını sağlar.
+            //FETCH to json.
+
+            //Brand filter
                 .then(data => data.json())
                 .then(data => {
                     for (var i of data) {
                         bootcampId.innerHTML += `
            <p><a onclick="filterByBrand('${i.name}')">${i.name}</a></p>`
            console.log('{{uav.category}}')
-           //Her bir marka için option oluşturur.
-           //brand_liste eklenir.
+           //Brand option.
+           //add Brand.
                         var newOption = document.createElement('option');
                         newOption.value = i.id
                         newOption.text = i.name
-                        //Boş model gelememsi için newOPtion.Selected = true kullanılır.
+                        //newOPtion.Selected = true 
                         
                         newOption.text=='{{uav.brand}}'?newOption.selected=true:''
                         bootcampId.appendChild(newOption)
@@ -167,18 +165,18 @@
 
         //GETMODEL
         function getModel() {
-            //HTML içini temizler
+            //HTML clear
             model.innerHTML = ""
-            //brand seçtikten sonra modeli seçebilmek için brand.id alınır.
+            //brand id.
             fetch(`http://127.0.0.1:8000/api/model/`, {
                 method: 'get',
             })
-            //Yanıtı jsona çevirir.
+            //Fetch to json.
                 .then(data => data.json())
                 .then(data => {
                     for (var i of data) {
-                         //Her bir model için option oluşturur.
-                        //mdoel_liste eklenir.
+                         //Model option.
+                        //add model.
                         var newOption = document.createElement('option');
                         newOption.value = i.id
                         newOption.text = i.name
@@ -187,7 +185,7 @@
                     }
                 })
         }
-        //Sayfa yüklendiğinde çalışması gereken func.
+        //render function.
         getModel()
         getBrand();
         getCategory()
